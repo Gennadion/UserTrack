@@ -1,14 +1,11 @@
 import React from 'react';
-import Card from './components/Card';
 import './App.css';
-import NewUser from './components/NewUser';
+import AddUser from './components/Users/AddUser';
 
 function App() {
   return (
-    <div className="App">
-      <Card>
-        <NewUser />
-      </Card>
+    <div>
+      <AddUser />
     </div>
   );
 }
