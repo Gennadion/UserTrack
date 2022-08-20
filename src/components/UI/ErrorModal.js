@@ -5,7 +5,7 @@ import { Button } from "../Users/AddUser";
 const ErrorModal = (props) => {
   return (
     <Card>
-      <div className="backdrop"></div>
+      <div className="backdrop" onClick={props.onConfirm}></div>
       <div className="modal">
         <header className="header">
           <h2>{props.title}</h2>
@@ -14,7 +14,7 @@ const ErrorModal = (props) => {
           <p>{props.message}</p>
         </div>
         <footer className="actions">
-          <Button>Okay</Button>
+          <Button onClick={props.onConfirm}>Okay</Button>
         </footer>
       </div>
     </Card>
