@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Card = styled.div.attrs(props => ({
-  className: props.className
+const Card = styled.div.attrs((props) => ({
+  className: props.className,
 }))`
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
-  margin: 2rem auto;
-  padding: 1rem;
-  width: 90%;
   max-width: 40rem;
+  width: 90%;
+  margin: 2rem auto;
+
+  .input {
+    padding: 1rem;
+  }
 
   .input label {
     display: block;
@@ -78,13 +81,16 @@ const AddUser = (props) => {
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    if(enteredUsername.trim().length === 0 || enteredAge.trim().length === 0){
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
       return;
     }
-    if(enteredAge < 1) {
+    if (+enteredAge < 1) {
       return;
     }
-    console.log(enteredUsername, enteredAge);
+
+    const userId = Math.random().toString();
+
+    props.onAddUser(userId, enteredUsername, enteredAge);
     setEnteredUsername("");
     setEnteredAge("");
   };
@@ -119,4 +125,4 @@ const AddUser = (props) => {
   );
 };
 
-export {AddUser, Card};
+export { AddUser, Card };
