@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import ErrorModal from "../UI/ErrorModal";
 
-const Card = styled.div.attrs((props) => ({
-  className: props.className,
-}))`
+const Card = styled.div`
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
@@ -50,6 +49,58 @@ const Card = styled.div.attrs((props) => ({
     border: 1px solid #ccc;
     margin: 0.5rem 0;
     padding: 0.5rem;
+  }
+
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  .modal {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+    max-width: 40rem;
+    width: 90%;
+    margin: 2rem auto;
+    position: fixed;
+    top: 30vh;
+    left: 10%;
+    width: 80%;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  .header {
+    background: #4f005f;
+    padding: 1rem;
+  }
+
+  .header h2 {
+    margin: 0;
+    color: white;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (min-width: 768px) {
+    .modal {
+      left: calc(50% - 20rem);
+      width: 40rem;
+    }
   }
 `;
 
@@ -103,26 +154,29 @@ const AddUser = (props) => {
   };
 
   return (
-    <Card>
-      <form className="input" onSubmit={addUserHandler}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={enteredUsername}
-          onChange={usernameChangeHandler}
-        />
-        <label htmlFor="age">Age (Years)</label>
-        <input
-          id="age"
-          type="number"
-          value={enteredAge}
-          onChange={ageChangeHandler}
-        />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
+    <div>
+      <ErrorModal title="Error Occured" message="Something went wrong!" />
+      <Card>
+        <form className="input" onSubmit={addUserHandler}>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={enteredUsername}
+            onChange={usernameChangeHandler}
+          />
+          <label htmlFor="age">Age (Years)</label>
+          <input
+            id="age"
+            type="number"
+            value={enteredAge}
+            onChange={ageChangeHandler}
+          />
+          <Button type="submit">Add User</Button>
+        </form>
+      </Card>
+    </div>
   );
 };
 
-export { AddUser, Card };
+export { AddUser, Card, Button };
